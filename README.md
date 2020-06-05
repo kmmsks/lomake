@@ -3,4 +3,4 @@ Shiny-lomakkeen testailua
 
 Meneekö perille?
 
-Perille tuli.
+Perille tuli GitHubiin. Näkyykö paikallisesti?
