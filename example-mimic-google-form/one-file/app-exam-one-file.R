@@ -1,6 +1,8 @@
 library(shiny)
+library(here)
 
-dir.create('responses', recursive = TRUE, showWarnings = FALSE)
+dir.create(here('data','responses'), recursive = TRUE, showWarnings = FALSE)
+
 # which fields get saved 
 fieldsAll <- c("name", "favourite_pkg", "used_shiny", "r_num_years", "os_type")
 
@@ -46,7 +48,7 @@ loadData <- function() {
 }
 
 # directory where responses get stored
-responsesDir <- file.path("responses")
+responsesDir <- here("data", "responses")
 
 # CSS to use in the app
 appCSS <-
@@ -54,8 +56,9 @@ appCSS <-
    .shiny-input-container { margin-top: 25px; }
    #submit_msg { margin-left: 15px; }
    #error { color: red; }
-   body { background: #fcfcfc; }
-   #header { background: #fff; border-bottom: 1px solid #ddd; margin: -20px -15px 0; padding: 15px 15px 10px; }
+   body { background: ##fcfcfc; } 
+   #header { background: coral; border-bottom: 1px solid #ddd; margin: -20px -15px 0; padding: 15px 15px 10px; }
+   h1{color: green;}
   "
 
 # usernames that are admins
@@ -74,45 +77,17 @@ shinyApp(
   ui = fluidPage(
     shinyjs::useShinyjs(),
     shinyjs::inlineCSS(appCSS),
-    title = "Mimicking a Google Form with a Shiny app",
-    tags$head(
-      tags$link(rel = "shortcut icon", type="image/x-icon", href="http://daattali.com/shiny/img/favicon.ico"),
-      
-      # Facebook OpenGraph tags
-      tags$meta(property = "og:title", content = share$title),
-      tags$meta(property = "og:type", content = "website"),
-      tags$meta(property = "og:url", content = share$url),
-      tags$meta(property = "og:image", content = share$image),
-      tags$meta(property = "og:description", content = share$description),
-      
-      # Twitter summary cards
-      tags$meta(name = "twitter:card", content = "summary"),
-      tags$meta(name = "twitter:site", content = paste0("@", share$twitter_user)),
-      tags$meta(name = "twitter:creator", content = paste0("@", share$twitter_user)),
-      tags$meta(name = "twitter:title", content = share$title),
-      tags$meta(name = "twitter:description", content = share$description),
-      tags$meta(name = "twitter:image", content = share$image)
-    ),
-    tags$a(
-      href="https://github.com/daattali/shiny-server/tree/master/mimic-google-form",
-      tags$img(style="position: absolute; top: 0; right: 0; border: 0;",
-               src="github-green-right.png",
-               alt="Fork me on GitHub")
-    ),
+    title = "Testilomake",
+    
     div(id = "header",
-        h1("Mimicking a Google Form with a Shiny app"),
-        h4("This app is a supplement to my",
-           a(href = "http://deanattali.com/2015/06/14/mimicking-google-form-shiny/",
-             "blog post on the topic")
+        h1("Testilomake"),
+        h4("Luetaan csv-tauluja ja niita voi kommentoida."
         ),
         strong( 
-          span("Created by "),
-          a("Dean Attali", href = "http://deanattali.com"),
-          HTML("&bull;"),
-          span("Code"),
-          a("on GitHub", href = "https://github.com/daattali/shiny-server/tree/master/mimic-google-form"),
-          HTML("&bull;"),
-          a("More apps", href = "http://daattali.com/shiny/"), "by Dean")
+          span("Leipäteksti"),
+          a("Linkki", href = "http://www.google.com"),
+          #HTML("&bull;"),
+          )
     ),
     
     fluidRow(

@@ -1,0 +1,50 @@
+---
+title: "arviointilomake"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(here)
+library(DT)
+```
+
+## Testilomake
+
+Lisätään data
+
+```{r}
+datatable(t(fread(here('data', 'proposals', '1.csv'), header = TRUE)))
+
+```
+
+
+
+```{r echo = FALSE, results = "asis"}
+
+
+prop_location <- here('data', 'proposals')
+prop_files <- list.files(path=prop_location, full.names=TRUE)
+
+ls <- lapply(prop_files, fread, header = TRUE)
+input <- rbindlist(ls)
+set.seed(1)
+input[,more_info:=paste(sample(x = LETTERS, size = 100, replace = TRUE), collapse = "")]
+
+
+template <- "## This is proposal by %s
+Synopsis of the proposal: %s.
+
+Additional info is:
+%s.
+
+" # dont't forget the newline
+
+for (i in seq(nrow(input))) {
+  current <- input[i, ]
+  cat(sprintf(template, current$author, current$synopsis, current$more_info))
+}
+
+```
+
